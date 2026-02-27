@@ -1,11 +1,8 @@
 const { Router } = require("express");
 const membersRouter = Router();
+const membersController = require("../controllers/membersController");
 
-membersRouter.get("/", (req, res) => {
-  res.render("index");
-});
-membersRouter.get("/sign-up", (req, res) => {
-  res.render("sign-up");
-});
+membersRouter.get("/", membersController.index);
+membersRouter.get("/sign-up", membersController.signup);
 
 module.exports = membersRouter;
