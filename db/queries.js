@@ -7,4 +7,10 @@ async function signUpPost(firstName, lastName, username, password) {
   );
 }
 
-module.exports = { signUpPost };
+async function joinClub(username) {
+  await pool.query("UPDATE users SET is_member = true WHERE username = $1", [
+    username,
+  ]);
+}
+
+module.exports = { signUpPost, joinClub };

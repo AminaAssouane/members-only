@@ -1,5 +1,9 @@
 const db = require("../db/queries");
 const { body, validationResult, matchedData } = require("express-validator");
+const bcrypt = require("bcryptjs");
+
+const secretCode = "galaxy";
+let currentUsername;
 
 function index(req, res) {
   res.render("index");
@@ -51,9 +55,26 @@ async function signUpPost(req, res) {
       oldData: req.body,
     });
   }
-  const { firstName, lastName, username, password } = req.body;
-  await db.signUpPost(firstName, lastName, username, password);
-  res.redirect("/");
+  try {
+    const { firstName, lastName, username, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await db.signUpPost(firstName, lastName, username, hashedPassword);
+    currentUsername = username;
+    res.redirect("/join-club");
+  } catch (error) {
+    console.error("Error occurred : ", error);
+  }
+}
+
+function joinClubGet(req, res) {
+  res.render("join-club");
+}
+
+async function joinClubPost(req, res) {
+  if (req.body.secretCode === secretCode) {
+    await db.joinClub(currentUsername);
+    res.send("Joined the club!");
+  }
 }
 
 module.exports = {
@@ -61,4 +82,6 @@ module.exports = {
   signUp,
   validateUser,
   signUpPost,
+  joinClubGet,
+  joinClubPost,
 };
