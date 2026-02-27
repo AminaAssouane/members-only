@@ -9,5 +9,17 @@
   <body>
     <h1>Index</h1>
     <%- include("partials/newmessage.ejs")%>
+    <ul>
+      <% messages.forEach((message) => {%>
+      <li>
+        <% if (user?.is_member) {%>
+        <div>Author: <%= message.user.username%></div>
+        <div>Time : <%= message.timestamp %></div>
+        <% } %>
+        <div>Title : <%= message.title%></div>
+        <div>Text: <%= message.text%></div>
+      </li>
+      <%});%>
+    </ul>
   </body>
 </html>

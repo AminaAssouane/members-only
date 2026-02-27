@@ -31,10 +31,24 @@ async function newMessage(user, title, text) {
   );
 }
 
+async function getMessages() {
+  const { rows } = await pool.query("SELECT * FROM messages;");
+  return rows;
+}
+async function getUser(id) {
+  const { rows } = await pool.query(
+    "SELECT username FROM users WHERE id = $1",
+    [id],
+  );
+  return rows[0];
+}
+
 module.exports = {
   signUpPost,
   joinClub,
   findUserByUsername,
   findById,
   newMessage,
+  getMessages,
+  getUser,
 };

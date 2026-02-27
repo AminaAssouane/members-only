@@ -6,11 +6,6 @@ const passport = require("passport");
 const secretCode = "galaxy";
 let currentUsername;
 
-// INDEX
-function index(req, res) {
-  res.render("index", { user: req.user });
-}
-
 // SIGN UP
 function signUp(req, res) {
   res.render("sign-up", {
@@ -107,8 +102,24 @@ async function newMessagePost(req, res) {
   }
 }
 
+// HOME
+async function getMessages(req, res) {
+  const messages = await db.getMessages();
+
+  const messagesWithUsers = await Promise.all(
+    messages.map(async (message) => {
+      const user = await db.getUser(message.user_id);
+      return { ...message, user };
+    }),
+  );
+
+  res.render("index", {
+    user: req.user,
+    messages: messagesWithUsers,
+  });
+}
+
 module.exports = {
-  index,
   signUp,
   validateUser,
   signUpPost,
@@ -118,4 +129,5 @@ module.exports = {
   loginPost,
   newMessageGet,
   newMessagePost,
+  getMessages,
 };
