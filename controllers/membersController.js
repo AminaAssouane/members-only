@@ -92,6 +92,11 @@ function loginPost(req, res, next) {
   })(req, res, next);
 }
 
+// NEW MESSAGE
+function newMessageGet(req, res) {
+  res.render("new-message");
+}
+
 module.exports = {
   index,
   signUp,
@@ -101,4 +106,5 @@ module.exports = {
   joinClubPost,
   loginGet,
   loginPost,
+  newMessageGet,
 };
