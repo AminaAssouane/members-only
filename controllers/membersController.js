@@ -1,14 +1,17 @@
 const db = require("../db/queries");
 const { body, validationResult, matchedData } = require("express-validator");
 const bcrypt = require("bcryptjs");
+const passport = require("passport");
 
 const secretCode = "galaxy";
 let currentUsername;
 
+// INDEX
 function index(req, res) {
   res.render("index");
 }
 
+// SIGN UP
 function signUp(req, res) {
   res.render("sign-up", {
     oldData: {},
@@ -66,6 +69,7 @@ async function signUpPost(req, res) {
   }
 }
 
+// JOIN CLUB
 function joinClubGet(req, res) {
   res.render("join-club");
 }
@@ -77,8 +81,15 @@ async function joinClubPost(req, res) {
   }
 }
 
+// LOGIN
 function loginGet(req, res) {
   res.render("login");
+}
+function loginPost(req, res, next) {
+  passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/login",
+  })(req, res, next);
 }
 
 module.exports = {
@@ -89,4 +100,5 @@ module.exports = {
   joinClubGet,
   joinClubPost,
   loginGet,
+  loginPost,
 };
