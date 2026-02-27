@@ -8,7 +8,7 @@ let currentUsername;
 
 // INDEX
 function index(req, res) {
-  res.render("index");
+  res.render("index", { user: req.user });
 }
 
 // SIGN UP
