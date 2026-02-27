@@ -13,4 +13,14 @@ async function joinClub(username) {
   ]);
 }
 
-module.exports = { signUpPost, joinClub };
+async function findUserByUsername(username) {
+  return await pool.query("SELECT * FROM users WHERE username = $1", [
+    username,
+  ]);
+}
+
+async function findById(id) {
+  return await pool.query("SELECT * FROM users WHERE id = $1", [id]);
+}
+
+module.exports = { signUpPost, joinClub, findUserByUsername, findById };
