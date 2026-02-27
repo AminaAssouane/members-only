@@ -35,7 +35,9 @@ const validateUser = [
     .withMessage("Password must be at least 6 characters."),
   body("confirmPassword")
     .notEmpty()
-    .withMessage("Confirm Password cannot be empty."),
+    .withMessage("Confirm Password cannot be empty.")
+    .custom((value, { req }) => value === req.body.password)
+    .withMessage("Passwords do not match."),
 ];
 
 async function signUpPost(req, res) {
