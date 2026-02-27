@@ -3,6 +3,8 @@ const membersRouter = Router();
 const membersController = require("../controllers/membersController");
 
 membersRouter.get("/", membersController.index);
+
 membersRouter.get("/sign-up", membersController.signUp);
+membersRouter.post("/sign-up", membersController.signUpPost);
 
 module.exports = membersRouter;
