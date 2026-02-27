@@ -6,7 +6,10 @@ function index(req, res) {
 }
 
 function signUp(req, res) {
-  res.render("sign-up");
+  res.render("sign-up", {
+    oldData: {},
+    errors: [],
+  });
 }
 
 const validateUser = [
@@ -45,6 +48,7 @@ async function signUpPost(req, res) {
   if (!errors.isEmpty()) {
     return res.status(400).render("sign-up", {
       errors: errors.array(),
+      oldData: req.body,
     });
   }
   const { firstName, lastName, username, password } = req.body;

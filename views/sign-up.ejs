@@ -12,11 +12,26 @@
       <fieldset>
         <legend>Sign up form</legend>
         <label for="firstName">First name : </label>
-        <input type="text" name="firstName" id="firstName" />
+        <input
+          type="text"
+          name="firstName"
+          id="firstName"
+          value="<%= oldData.firstName || '' %>"
+        />
         <label for="lastName">Last name : </label>
-        <input type="text" name="lastName" id="lastName" />
+        <input
+          type="text"
+          name="lastName"
+          id="lastName"
+          value="<%= oldData.lastName || '' %>"
+        />
         <label for="username">Username : </label>
-        <input type="text" name="username" id="username" />
+        <input
+          type="text"
+          name="username"
+          id="username"
+          value="<%= oldData.username || '' %>"
+        />
         <label for="password">Password : </label>
         <input type="password" name="password" id="password" />
         <label for="confirmPassword">Confirm password : </label>
