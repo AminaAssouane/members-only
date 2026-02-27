@@ -2,11 +2,11 @@ function index(req, res) {
   res.render("index");
 }
 
-function signup(req, res) {
+function signUp(req, res) {
   res.render("sign-up");
 }
 
 module.exports = {
   index,
-  signup,
+  signUp,
 };

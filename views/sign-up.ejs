@@ -7,5 +7,21 @@
   </head>
   <body>
     <h1>Sign up</h1>
+    <form action="/sign-up" method="POST">
+      <fieldset>
+        <legend>Sign up form</legend>
+        <label for="first-name">First name : </label>
+        <input type="text" name="first-name" id="first-name" />
+        <label for="last-name">Last name : </label>
+        <input type="text" name="last-name" id="last-name" />
+        <label for="username">Username : </label>
+        <input type="text" name="username" id="username" />
+        <label for="password">Password : </label>
+        <input type="password" name="password" id="password" />
+        <label for="confirmPassword">Confirm password : </label>
+        <input type="password" name="confirmPassword" id="confirmPassword" />
+        <button type="submit">Sign Up</button>
+      </fieldset>
+    </form>
   </body>
 </html>
