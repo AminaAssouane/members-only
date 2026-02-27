@@ -97,6 +97,16 @@ function newMessageGet(req, res) {
   res.render("new-message");
 }
 
+async function newMessagePost(req, res) {
+  try {
+    await db.newMessage(req.user, req.body.title, req.body.text);
+    res.send("New message added");
+  } catch (error) {
+    console.error("Error occurred : ", error);
+    res.redirect("/new-message");
+  }
+}
+
 module.exports = {
   index,
   signUp,
@@ -107,4 +117,5 @@ module.exports = {
   loginGet,
   loginPost,
   newMessageGet,
+  newMessagePost,
 };

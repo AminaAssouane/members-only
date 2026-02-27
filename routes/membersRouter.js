@@ -18,5 +18,6 @@ membersRouter.get("/login", membersController.loginGet);
 membersRouter.post("/login", membersController.loginPost);
 
 membersRouter.get("/new-message", membersController.newMessageGet);
+membersRouter.post("/new-message", membersController.newMessagePost);
 
 module.exports = membersRouter;

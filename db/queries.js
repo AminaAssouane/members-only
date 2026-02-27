@@ -23,4 +23,18 @@ async function findById(id) {
   return await pool.query("SELECT * FROM users WHERE id = $1", [id]);
 }
 
-module.exports = { signUpPost, joinClub, findUserByUsername, findById };
+async function newMessage(user, title, text) {
+  const timestamp = new Date();
+  await pool.query(
+    "INSERT INTO messages (user_id, title, timestamp, text) VALUES ($1, $2, $3, $4)",
+    [user.id, title, timestamp, text],
+  );
+}
+
+module.exports = {
+  signUpPost,
+  joinClub,
+  findUserByUsername,
+  findById,
+  newMessage,
+};
