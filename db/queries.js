@@ -6,3 +6,5 @@ async function signUpPost(firstName, lastName, username, password) {
     [firstName, lastName, username, password],
   );
 }
+
+module.exports = { signUpPost };
