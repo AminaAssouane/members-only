@@ -43,7 +43,9 @@ const validateUser = [
 async function signUpPost(req, res) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).redirect("/sign-up");
+    return res.status(400).render("sign-up", {
+      errors: errors.array(),
+    });
   }
   const { firstName, lastName, username, password } = req.body;
   await db.signUpPost(firstName, lastName, username, password);
