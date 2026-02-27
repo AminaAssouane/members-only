@@ -77,6 +77,10 @@ async function joinClubPost(req, res) {
   }
 }
 
+function loginGet(req, res) {
+  res.render("login");
+}
+
 module.exports = {
   index,
   signUp,
@@ -84,4 +88,5 @@ module.exports = {
   signUpPost,
   joinClubGet,
   joinClubPost,
+  loginGet,
 };

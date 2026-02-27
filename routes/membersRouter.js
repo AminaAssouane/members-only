@@ -14,4 +14,6 @@ membersRouter.post(
 membersRouter.get("/join-club", membersController.joinClubGet);
 membersRouter.post("/join-club", membersController.joinClubPost);
 
+membersRouter.get("/login", membersController.loginGet);
+
 module.exports = membersRouter;
