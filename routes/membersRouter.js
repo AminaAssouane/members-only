@@ -5,6 +5,10 @@ const membersController = require("../controllers/membersController");
 membersRouter.get("/", membersController.index);
 
 membersRouter.get("/sign-up", membersController.signUp);
-membersRouter.post("/sign-up", membersController.signUpPost);
+membersRouter.post(
+  "/sign-up",
+  membersController.validateUser,
+  membersController.signUpPost,
+);
 
 module.exports = membersRouter;
