@@ -4,6 +4,7 @@ const membersController = require("../controllers/membersController");
 const { ensureAuthenticated } = require("../middleware/authMiddleware");
 
 membersRouter.get("/", membersController.getMessages);
+membersRouter.post("/", membersController.deleteMessage);
 
 membersRouter.get("/sign-up", membersController.signUp);
 membersRouter.post(

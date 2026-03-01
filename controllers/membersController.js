@@ -119,6 +119,12 @@ async function getMessages(req, res) {
   });
 }
 
+// DELETE
+async function deleteMessage(req, res) {
+  await db.deleteMessage(req.body.messageId);
+  res.redirect("/");
+}
+
 module.exports = {
   signUp,
   validateUser,
@@ -130,4 +136,5 @@ module.exports = {
   newMessageGet,
   newMessagePost,
   getMessages,
+  deleteMessage,
 };

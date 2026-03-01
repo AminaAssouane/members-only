@@ -12,15 +12,18 @@
     <ul>
       <% messages.forEach((message) => {%>
       <li>
-        <% if (user?.is_member) {%>
-        <div>Author: <%= message.user.username%></div>
-        <div>Time : <%= message.timestamp %></div>
-        <% } %>
-        <div>Title : <%= message.title%></div>
-        <div>Text: <%= message.text%></div>
-        <% if (user?.admin) { %>
-        <button>Delete</button>
-        <% } %>
+        <form action="/" method="POST">
+          <% if (user?.is_member) {%>
+          <div>Author: <%= message.user.username%></div>
+          <div>Time : <%= message.timestamp %></div>
+          <% } %>
+          <div>Title : <%= message.title%></div>
+          <div>Text: <%= message.text%></div>
+          <% if (user?.admin) { %>
+            <input type="hidden" name="messageId" value="<%= message.id %>">
+            <button type="submit">Delete</button>
+          <% } %>
+        </form>
       </li>
       <%});%>
     </ul>
