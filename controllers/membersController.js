@@ -54,9 +54,9 @@ async function signUpPost(req, res) {
     });
   }
   try {
-    const { firstName, lastName, username, password } = req.body;
+    const { firstName, lastName, username, password, admin } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10);
-    await db.signUpPost(firstName, lastName, username, hashedPassword);
+    await db.signUpPost(firstName, lastName, username, hashedPassword, admin);
     currentUsername = username;
     res.redirect("/join-club");
   } catch (error) {

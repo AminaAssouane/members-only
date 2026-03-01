@@ -18,6 +18,9 @@
         <% } %>
         <div>Title : <%= message.title%></div>
         <div>Text: <%= message.text%></div>
+        <% if (user?.admin) { %>
+        <button>Delete</button>
+        <% } %>
       </li>
       <%});%>
     </ul>
