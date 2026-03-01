@@ -4,7 +4,6 @@ const bcrypt = require("bcryptjs");
 const passport = require("passport");
 
 const secretCode = process.env.SESSION_SECRET;
-let currentUsername;
 
 // SIGN UP
 function signUp(req, res) {
@@ -55,10 +54,19 @@ async function signUpPost(req, res) {
   }
   try {
     const { firstName, lastName, username, password, admin } = req.body;
+    console.log(admin);
     const hashedPassword = await bcrypt.hash(password, 10);
-    await db.signUpPost(firstName, lastName, username, hashedPassword, admin);
-    currentUsername = username;
-    res.redirect("/join-club");
+    let isAdmin = admin ? true : false;
+    await db.signUpPost(firstName, lastName, username, hashedPassword, isAdmin);
+    // Fetch the newly created user (so we can log them in)
+    const user = await db.findUserByUsername(username);
+    console.log(user);
+
+    // Log them in
+    req.login(user, (err) => {
+      if (err) return next(err);
+      res.redirect("/join-club");
+    });
   } catch (error) {
     console.error("Error occurred : ", error);
   }
@@ -70,9 +78,12 @@ function joinClubGet(req, res) {
 }
 
 async function joinClubPost(req, res) {
+  if (!req.user) return res.status(403).send("You must be logged in");
   if (req.body.secretCode === secretCode) {
-    await db.joinClub(currentUsername);
+    await db.joinClub(req.user.username);
     res.send("Joined the club!");
+  } else {
+    res.status(403).send("Forbidden or invalid secret code");
   }
 }
 
