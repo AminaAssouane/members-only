@@ -29,5 +29,10 @@
     </ul>
     <a href="/sign-up"><button>Sign up</button></a>
     <a href="/login"><button>Login</button></a>
+    <% if (user) { %>
+      <form action="/logout" method="POST">
+        <button type="submit">Logout</button>
+      </form>
+    <% } %>
   </body>
 </html>

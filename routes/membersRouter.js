@@ -30,4 +30,6 @@ membersRouter.post(
   membersController.newMessagePost,
 );
 
+membersRouter.post("/logout", membersController.logout);
+
 module.exports = membersRouter;

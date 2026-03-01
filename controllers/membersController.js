@@ -138,6 +138,14 @@ async function deleteMessage(req, res) {
   res.redirect("/");
 }
 
+//LOG OUT
+function logout(req, res) {
+  req.logout(function (err) {
+    if (err) return next(err);
+    res.redirect("/");
+  });
+}
+
 module.exports = {
   signUp,
   validateUser,
@@ -150,4 +158,5 @@ module.exports = {
   newMessagePost,
   getMessages,
   deleteMessage,
+  logout,
 };
