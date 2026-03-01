@@ -121,7 +121,9 @@ async function getMessages(req, res) {
 
 // DELETE
 async function deleteMessage(req, res) {
-  await db.deleteMessage(req.body.messageId);
+  if (req.user && req.user.admin) {
+    await db.deleteMessage(req.body.messageId);
+  }
   res.redirect("/");
 }
 
